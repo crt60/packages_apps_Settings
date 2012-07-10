@@ -1168,12 +1168,12 @@
             </intent-filter>
         </activity>
 
-        <!-- DeviceInfo adds the user's requested build to stats upload.  -->
+        <!-- DeviceInfo adds the user's requested build to stats upload.  
         <receiver android:name=".DeviceInfo$StatsReportReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.STATISTICS_REPORT" />
             </intent-filter>
-        </receiver>
+        </receiver> -->
 
         <activity android:name="BatteryInfo" android:label="@string/battery_info_label">
             <intent-filter>
@@ -1382,13 +1382,13 @@
             </intent-filter>
         </activity>
         
-		<activity android:name="Settings$AnonymousStatsActivity"
+<!--	<activity android:name="Settings$AnonymousStatsActivity"
                 android:label="@string/anonymous_statistics_title"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:clearTaskOnLaunch="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.aokpstats.AnonymousStats" />
-        </activity>
+        </activity> -->
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
@@ -1407,7 +1407,7 @@
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_info" />
         </receiver>
         
-        <receiver android:name=".aokpstats.ReportingServiceManager"
+<!--    <receiver android:name=".aokpstats.ReportingServiceManager"
             android:enabled="true"
             android:exported="false"
             android:label="ReportingServiceManager">
@@ -1421,7 +1421,7 @@
             android:enabled="true"
             android:exported="false"
             android:name=".aokpstats.ReportingService">
-        </service>
+        </service> -->
 
     </application>
 </manifest>

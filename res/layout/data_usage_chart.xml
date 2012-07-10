@@ -38,7 +38,7 @@
         settings:primaryDrawable="@drawable/data_grid_primary"
         settings:secondaryDrawable="@drawable/data_grid_secondary"
         settings:borderDrawable="@drawable/data_grid_border"
-        settings:labelColor="@android:color/holo_blue_light" />
+        settings:labelColor="#ff959595" />
 
     <com.android.settings.widget.ChartNetworkSeriesView
         android:id="@+id/series"
@@ -46,8 +46,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="left|bottom"
         settings:strokeColor="@android:color/holo_blue_light"
-        settings:fillColor="#c033b5e5"
-        settings:fillColorSecondary="#6633b5e5" />
+        settings:fillColor="#c0959595"
+        settings:fillColorSecondary="#66959595" />
 
     <com.android.settings.widget.ChartNetworkSeriesView
         android:id="@+id/detail_series"
