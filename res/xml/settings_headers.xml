@@ -77,7 +77,7 @@
             
             
 
-    <header android:id="@+id/advanced_settings"
+<!--<header android:id="@+id/advanced_settings"
             android:title="@string/advanced_settings_title"
             android:icon="@drawable/ic_settings_advanced">
         <intent
