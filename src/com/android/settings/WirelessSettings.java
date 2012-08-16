@@ -38,7 +38,7 @@ import android.widget.Switch;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.nfc.NfcEnabler;
-import com.android.settings.wifi.p2p.WifiP2pEnabler;
+import com.android.settings.NsdEnabler;
 
 public class WirelessSettings extends SettingsPreferenceFragment
     implements Preference.OnPreferenceChangeListener {
@@ -48,11 +48,11 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
-    private static final String KEY_TOGGLE_WIFI_P2P = "toggle_wifi_p2p";
-    private static final String KEY_WIFI_P2P_SETTINGS = "wifi_p2p_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
+    private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
+    private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_NFC_POLLING_MODE = "nfc_polling_mode";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
@@ -62,9 +62,8 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private CheckBoxPreference mAirplaneModePreference;
     private NfcEnabler mNfcEnabler;
     private NfcAdapter mNfcAdapter;
+    private NsdEnabler mNsdEnabler;
     ListPreference mNfcPollingMode;
-
-    private WifiP2pEnabler mWifiP2pEnabler;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -115,15 +114,19 @@ public class WirelessSettings extends SettingsPreferenceFragment
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
         PreferenceScreen androidBeam = (PreferenceScreen) findPreference(KEY_ANDROID_BEAM_SETTINGS);
+        CheckBoxPreference nsd = (CheckBoxPreference) findPreference(KEY_TOGGLE_NSD);
+
         mNfcPollingMode = (ListPreference) findPreference(KEY_NFC_POLLING_MODE);
         mNfcPollingMode.setOnPreferenceChangeListener(this);
         mNfcPollingMode.setValue((Settings.System.getInt(activity.getContentResolver(),
                 Settings.System.NFC_POLLING_MODE, 3)) + "");
 
-        CheckBoxPreference wifiP2p = (CheckBoxPreference) findPreference(KEY_TOGGLE_WIFI_P2P);
-
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam, mNfcPollingMode);
+
+        // Remove NSD checkbox by default
+        getPreferenceScreen().removePreference(nsd);
+        //mNsdEnabler = new NsdEnabler(activity, nsd);
 
         String toggleable = Settings.System.getString(activity.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -172,15 +175,6 @@ public class WirelessSettings extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(findPreference(KEY_MOBILE_NETWORK_SETTINGS));
         }
 
-        WifiP2pManager p2p = (WifiP2pManager) activity.getSystemService(Context.WIFI_P2P_SERVICE);
-
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT)) {
-            getPreferenceScreen().removePreference(wifiP2p);
-        } else {
-            mWifiP2pEnabler = new WifiP2pEnabler(activity, wifiP2p);
-        }
-        getPreferenceScreen().removePreference(findPreference(KEY_WIFI_P2P_SETTINGS));
-
         // Enable Proxy selector settings if allowed.
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
         DevicePolicyManager mDPM = (DevicePolicyManager)
@@ -198,6 +192,26 @@ public class WirelessSettings extends SettingsPreferenceFragment
             Preference p = findPreference(KEY_TETHER_SETTINGS);
             p.setTitle(Utils.getTetheringLabel(cm));
         }
+
+        // Enable link to CMAS app settings depending on the value in config.xml.
+        boolean isCellBroadcastAppLinkEnabled = this.getResources().getBoolean(
+                com.android.internal.R.bool.config_cellBroadcastAppLinks);
+        try {
+            if (isCellBroadcastAppLinkEnabled) {
+                PackageManager pm = getPackageManager();
+                if (pm.getApplicationEnabledSetting("com.android.cellbroadcastreceiver")
+                        == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                    isCellBroadcastAppLinkEnabled = false;  // CMAS app disabled
+                }
+            }
+        } catch (IllegalArgumentException ignored) {
+            isCellBroadcastAppLinkEnabled = false;  // CMAS app not installed
+        }
+        if (!isCellBroadcastAppLinkEnabled) {
+            PreferenceScreen root = getPreferenceScreen();
+            Preference ps = findPreference(KEY_CELL_BROADCAST_SETTINGS);
+            if (ps != null) root.removePreference(ps);
+        }
     }
 
     @Override
@@ -208,9 +222,8 @@ public class WirelessSettings extends SettingsPreferenceFragment
         if (mNfcEnabler != null) {
             mNfcEnabler.resume();
         }
-
-        if (mWifiP2pEnabler != null) {
-            mWifiP2pEnabler.resume();
+        if (mNsdEnabler != null) {
+            mNsdEnabler.resume();
         }
     }
 
@@ -222,9 +235,8 @@ public class WirelessSettings extends SettingsPreferenceFragment
         if (mNfcEnabler != null) {
             mNfcEnabler.pause();
         }
-
-        if (mWifiP2pEnabler != null) {
-            mWifiP2pEnabler.pause();
+        if (mNsdEnabler != null) {
+            mNsdEnabler.pause();
         }
     }
 
@@ -236,5 +248,10 @@ public class WirelessSettings extends SettingsPreferenceFragment
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());
         }
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_more_networks;
     }
 }

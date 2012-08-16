@@ -139,8 +139,6 @@ final class BluetoothEventManager {
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.v(TAG, "Received " + intent.getAction());
-
             String action = intent.getAction();
             BluetoothDevice device = intent
                     .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -285,14 +283,6 @@ final class BluetoothEventManager {
                     if (!device.getAddress().equals(getDockedDeviceAddress(context))) {
                         cachedDevice.setVisible(false);
                     }
-                }
-                if (cachedDevice.isRemovable()) {
-                    synchronized (mCallbacks) {
-                        for (BluetoothCallback callback : mCallbacks) {
-                            callback.onDeviceDeleted(cachedDevice);
-                        }
-                    }
-                    mDeviceManager.onDeviceDeleted(cachedDevice);
                 }
                 int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON,
                         BluetoothDevice.ERROR);
