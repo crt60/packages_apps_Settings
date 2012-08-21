@@ -24,8 +24,6 @@
     <string name="create">Create</string>
 
     <!-- Device Info --> <skip />
-    <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
-    <string name="device_info_default">Unknown</string>
 
     <!-- Category headings in left-pane header menu --> <skip />
     <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
