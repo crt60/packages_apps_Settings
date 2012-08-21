@@ -4136,20 +4136,20 @@
     <string name="safe_headset_restore_title">Safe headset volume</string>
     <string name="safe_headset_restore_summary">Prevent loud volume levels when headset is first plugged in</string>
 
-    <string name="quick_links_title">Quick Links</string>
-    <string name="rom_control_title">ROM Control</string>
-    <string name="themes_title">Themes</string>
+    <string name="quick_links_title">AoCP Customized</string>
+    <string name="rom_control_title">Personalize</string>
+    <string name="ota_title">OTA</string>
 
-    <string name="mod_version">AOKP version</string>
+    <string name="mod_version">AoCP build</string>
     <string name="mod_version_default">Unknown</string>
 
     <!-- Anonymous Statistics #CM -->
     <!-- About device screen, list item title. Takes the user to the screen about opting in or out of anonymous statistics. -->
-    <string name="anonymous_statistics_title">AOKP Statistics</string>
-    <string name="anonymous_statistics_summary">Help make AOKP better by opting into anonymous statistics reporting</string>
+    <string name="anonymous_statistics_title">AoCP Statistics</string>
+    <string name="anonymous_statistics_summary">Help make AoCP better by opting into anonymous statistics reporting</string>
     <string name="anonymous_statistics_warning_title">About</string>
-    <string name="anonymous_statistics_warning">Opting into AOKP Statistics will allow non-personal data to be submitted to the
-        developers of AOKP to track unique installations across devices. The information submitted includes an unique identifier,
+    <string name="anonymous_statistics_warning">Opting into AoCP Statistics will allow non-personal data to be submitted to the
+        developers of AoCP to track unique installations across devices. The information submitted includes an unique identifier,
         which does not compromise your privacy or personal data. The data is submitted once weekly, during boot.\n\nFor an example of the data that is submitted, tap on Preview Data.</string>
     <string name="enable_reporting_title">Enable reporting</string>
     <string name="preview_data_title">Preview data</string>
@@ -4158,7 +4158,7 @@
     <string name="anonymous_learn_more">Learn more</string>
 
     <!-- Anonymous Statistics - Notification -->
-    <string name="anonymous_notification_desc">Enable or Disable AOKP Statistics</string>
+    <string name="anonymous_notification_desc">Enable or Disable AoCP Statistics</string>
 
     <!-- Anonymous Statistics - Preview -->
     <string name="preview_id_title">Unique ID</string>

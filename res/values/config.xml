@@ -32,9 +32,7 @@
      <!-- LED Flashlight -->
 	<bool name="has_led_flash">true</bool>
 	
-     
-     <!-- Device Info -->
-     <string name="device_info_default">AoCP-CP-3</string>
-     
+	<!-- Device Info --> 	
+    <string name="device_info_default">AoCP-CP-3</string>
 
 </resources>

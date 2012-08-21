@@ -64,16 +64,16 @@
             android:title="@string/rom_control_title">
         <intent
                 android:action="android.intent.action.MAIN"
-                android:targetClass="com.aokp.romcontrol.ROMControlActivity"
-                android:targetPackage="com.aokp.romcontrol" />
+                android:targetClass="com.collective.personalize.PersonalizeActivity"
+                android:targetPackage="com.collective.personalize" />
     </header>
 
-    <header android:icon="@drawable/ic_settings_themes"
-            android:title="@string/themes_title">
+	<header android:icon="@drawable/ic_settings_ota"
+			android:title="@string/ota_title">
         <intent
                 android:action="android.intent.action.MAIN"
-                android:targetPackage="com.tmobile.themechooser"
-                android:targetClass="com.tmobile.themechooser.ThemeChooser" />
+                android:targetPackage="com.collective.ota"
+                android:targetClass="com.collective.ota.OTAActivity" />
     </header>
 
     <header android:id="@+id/advanced_settings"
