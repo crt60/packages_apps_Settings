@@ -57,8 +57,8 @@
         <item>5 minutes</item>
         <item>10 minutes</item>
         <item>30 minutes</item>
-		<item>1 hour</item>
-		<item>Never</item>
+	<item>1 hour</item>
+	<item>Never</item>
     </string-array>
 
     <!-- Do not translate. -->
@@ -419,6 +419,32 @@
         <item>2</item>
     </string-array>
 
+    <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi region code. -->
+    <string-array name="wifi_countrycode_entries">
+        <item>United States</item>
+        <item>Canada, Taiwan</item>
+        <item>Germany</item>
+        <item>Europe</item>
+        <item>Japan, Russia</item>
+        <item>Australia</item>
+        <item>China</item>
+        <item>Korea</item>
+        <item>Turkey</item>
+        <item>Singapore</item>
+    </string-array>
+
+    <string-array name="wifi_countrycode_values" translatable="false">
+        <item>US</item>
+        <item>CA</item>
+        <item>DE</item>
+        <item>GB</item>
+        <item>JP</item>
+        <item>AU</item>
+        <item>CN</item>
+        <item>KR</item>
+        <item>TR</item>
+        <item>SG</item>
+    </string-array>
 
     <!-- Display options for UsageStats class -->
     <string-array name="usage_stats_display_order_types">
@@ -464,15 +490,15 @@
 
     <!-- NFC settings. -->
     <string-array name="nfc_polling_mode_entries">
-		<item>Screen off</item>
-		<item>Screen on, locked</item>
-		<item>Screen on, unlocked (default)</item>
+        <item>@string/nfc_polling_mode_screen_off</item>
+        <item>@string/nfc_polling_mode_screen_locked</item>
+        <item>@string/nfc_polling_mode_screen_unlocked</item>
     </string-array>
 
     <string-array name="nfc_polling_mode_values">
-		<item>1</item>
-		<item>2</item>
-		<item>3</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <!-- Sound settings for emergency tone. -->
