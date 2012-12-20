@@ -33,7 +33,6 @@ import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.os.Parcel;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageVolume;
@@ -474,37 +473,26 @@ public class StorageMeasurement {
     private long measureMisc(IMediaContainerService imcs, File dir) {
         mFileInfoForMisc = new ArrayList<FileInfo>();
 
-        final Parcel p = Parcel.obtain();
-        try {
-            final byte[] bytes = imcs.listDirectory(dir.toString());
-            p.unmarshall(bytes, 0, bytes.length);
-            p.setDataPosition(0);
-        } catch (Exception e) {
-            Log.w(TAG, "Could not list directory from default container service for " + dir, e);
-            return 0;
-        }
+        final File[] files = dir.listFiles();
+        if (files == null) return 0;
 
         // Get sizes of all top level nodes except the ones already computed
         long counter = 0;
         long miscSize = 0;
 
-        int count = p.readInt();
-        for (int i = 0; i < count; i++) {
-            final String path = p.readString();
-            final String name = p.readString();
-            final boolean isDirectory = p.readInt() == 1;
-            final boolean isFile = p.readInt() == 1;
-            final long fileSize = isFile ? p.readLong() : 0;
-
+        for (File file : files) {
+            final String path = file.getAbsolutePath();
+            final String name = file.getName();
             if (sMeasureMediaTypes.contains(name)) {
                 continue;
             }
 
-            if (isFile) {
+            if (file.isFile()) {
+                final long fileSize = file.length();
                 mFileInfoForMisc.add(new FileInfo(path, fileSize, counter++));
                 miscSize += fileSize;
-            } else if (isDirectory) {
-                final long dirSize = getDirectorySize(imcs, new File(path));
+            } else if (file.isDirectory()) {
+                final long dirSize = getDirectorySize(imcs, file);
                 mFileInfoForMisc.add(new FileInfo(path, dirSize, counter++));
                 miscSize += dirSize;
             } else {
