@@ -26,6 +26,14 @@
      </PreferenceScreen>
 
      <ListPreference
+        android:key="lockscreen_background"
+        android:persistent="false"
+        android:dialogTitle="@string/lockscreen_custom_background_title"
+        android:title="@string/lockscreen_custom_background_title"
+        android:entries="@array/lockscreen_background_entries"
+        android:entryValues="@array/lockscreen_background_values" />
+
+     <ListPreference
         android:key="lockscreen_battery_status"
         android:persistent="false"
         android:dialogTitle="@string/lockscreen_battery_status_title"
@@ -33,6 +41,12 @@
         android:entries="@array/lockscreen_battery_status_entries"
         android:entryValues="@array/lockscreen_battery_status_values"
         android:defaultValue="0" />
+
+     <CheckBoxPreference
+        android:key="lockscreen_maximize_widgets"
+        android:persistent="false"
+        android:title="@string/lockscreen_maximize_widgets_title"
+        android:summary="@string/lockscreen_maximize_widgets_summary" />
 
      <Preference
         android:fragment="com.android.settings.cyanogenmod.LockscreenTargets"

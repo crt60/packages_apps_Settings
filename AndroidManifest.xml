@@ -953,29 +953,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="ChooseLockPatternSize" android:exported="false"/>
+
         <activity android:name="ChooseLockPattern" android:exported="false"/>
 
         <activity android:name="ChooseLockPassword" android:exported="false"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity android:name="ChooseLockPatternTutorial" android:exported="false"/>
-
-        <!-- Anonymous Statistics -->
-        <receiver android:name=".cmstats.ReportingServiceManager"
-            android:enabled="true"
-            android:exported="false"
-            android:label="ReportingServiceManager">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-
-        <service android:label="ReportingService"
-            android:enabled="true"
-            android:exported="false"
-            android:name=".cmstats.ReportingService">
-        </service>
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".deviceinfo.Status"
@@ -1507,6 +1492,8 @@
 
         <activity android:name=".cyanogenmod.LockscreenTargets" />
 
+        <activity android:name=".cyanogenmod.ChangeLog" />
+
         <activity android:name=".cyanogenmod.LockscreenInterface" />
 
         <activity android:name=".cyanogenmod.LockscreenButtons" />
@@ -1530,19 +1517,7 @@
 
         <activity android:name=".ApnEditor" />
 
-        <activity android:name="Settings$AnonymousStatsActivity"
-                android:label="@string/anonymous_statistics_title"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:clearTaskOnLaunch="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.cmstats.AnonymousStats" />
-        </activity>
-
-        <activity android:name=".cyanogenmod.ChangeLog" android:label="@string/changelog_title">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-            </intent-filter>
-        </activity>
+       
 
         <!-- CyanogenMod activities End -->
 
@@ -1552,7 +1527,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.app.action.START_ENCRYPTION" />
-                <category android:name="android.intent.category.DEFAULT" /> />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.CryptKeeperSettings" />

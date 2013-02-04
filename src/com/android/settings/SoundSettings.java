@@ -84,7 +84,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_DOCK_AUDIO_MEDIA_ENABLED = "dock_audio_media_enabled";
     private static final String KEY_QUIET_HOURS = "quiet_hours";
     private static final String KEY_VOLBTN_MUSIC_CTRL = "volbtn_music_controls";
-
+    private static final String KEY_HEADSET_CONNECT_PLAYER = "headset_connect_player";
+    private static final String PREF_ENABLE_QUIETTIME = "enable_quiettime";
+private static final String KEY_CONVERT_SOUND_TO_VIBRATE = "notification_convert_sound_to_vibration";
     private static final String RING_MODE_NORMAL = "normal";
     private static final String RING_MODE_VIBRATE = "vibrate";
     private static final String RING_MODE_MUTE = "mute";
@@ -106,10 +108,12 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private Preference mMusicFx;
     private CheckBoxPreference mLockSounds;
     private CheckBoxPreference mVolBtnMusicCtrl;
+    private CheckBoxPreference mHeadsetConnectPlayer;
+    private CheckBoxPreference mConvertSoundToVibration;
     private Preference mRingtonePreference;
     private Preference mNotificationPreference;
     private PreferenceScreen mQuietHours;
-
+    private CheckBoxPreference mEnableQuietTime;
     private Runnable mRingtoneLookupRunnable;
 
     private AudioManager mAudioManager;
@@ -212,9 +216,21 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVolBtnMusicCtrl.setChecked(Settings.System.getInt(resolver,
                 Settings.System.VOLBTN_MUSIC_CONTROLS, 1) != 0);
 
+        mHeadsetConnectPlayer = (CheckBoxPreference) findPreference(KEY_HEADSET_CONNECT_PLAYER);
+        mHeadsetConnectPlayer.setChecked(Settings.System.getInt(resolver,
+                Settings.System.HEADSET_CONNECT_PLAYER, 0) != 0);
+
+        mConvertSoundToVibration = (CheckBoxPreference) findPreference(KEY_CONVERT_SOUND_TO_VIBRATE);
+
+        mConvertSoundToVibration.setPersistent(false);
+        mConvertSoundToVibration.setChecked(Settings.System.getInt(resolver,
+                Settings.System.NOTIFICATION_CONVERT_SOUND_TO_VIBRATION, 1) != 0);
+
         mRingtonePreference = findPreference(KEY_RINGTONE);
         mNotificationPreference = findPreference(KEY_NOTIFICATION_SOUND);
-
+        mEnableQuietTime = (CheckBoxPreference) findPreference(PREF_ENABLE_QUIETTIME);
+        mEnableQuietTime.setChecked(Settings.System.getInt(resolver,
+                Settings.System.ENABLE_QUIETTIME, 0) != 0);	
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator == null || !vibrator.hasVibrator()) {
             removePreference(KEY_VIBRATE);
@@ -236,15 +252,13 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
         mMusicFx = mSoundSettings.findPreference(KEY_MUSICFX);
         Intent i = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+        mMusicFx.setIntent(i);
         PackageManager p = getPackageManager();
         List<ResolveInfo> ris = p.queryIntentActivities(i, PackageManager.GET_DISABLED_COMPONENTS);
-        if (ris.size() <= 2) {
-            // no need to show the item if there is no choice for the user to make
-            // note: the built in musicfx panel has two activities (one being a
-            // compatibility shim that launches either the other activity, or a
-            // third party one), hence the check for <=2. If the implementation
-            // of the compatbility layer changes, this check may need to be updated.
+        if (ris.size() == 0) {
             mSoundSettings.removePreference(mMusicFx);
+        } else if (ris.size() == 1) {
+            mMusicFx.setSummary(ris.get(0).loadLabel(p));
         }
 
         if (!Utils.isVoiceCapable(getActivity())) {
@@ -393,10 +407,17 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
                     mLockSounds.isChecked() ? 1 : 0);
 
+        } else if (preference == mConvertSoundToVibration) {
+            Settings.System.putInt(getContentResolver(), Settings.System.NOTIFICATION_CONVERT_SOUND_TO_VIBRATION,
+                    mConvertSoundToVibration.isChecked() ? 1 : 0);
+
         } else if (preference == mMusicFx) {
             // let the framework fire off the intent
             return false;
-
+        } else if (preference == mEnableQuietTime) {
+            Settings.System.putInt(getContentResolver(), Settings.System.ENABLE_QUIETTIME,
+					mEnableQuietTime.isChecked() ? 1 : 0);
+			return true;		
         } else if (preference == mDockAudioSettings) {
             int dockState = mDockIntent != null
                     ? mDockIntent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0)
@@ -432,7 +453,9 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         } else if (preference == mVolBtnMusicCtrl) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLBTN_MUSIC_CONTROLS,
                     mVolBtnMusicCtrl.isChecked() ? 1 : 0);
-
+        } else if (preference == mHeadsetConnectPlayer) {
+            Settings.System.putInt(getContentResolver(), Settings.System.HEADSET_CONNECT_PLAYER,
+                    mHeadsetConnectPlayer.isChecked() ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
