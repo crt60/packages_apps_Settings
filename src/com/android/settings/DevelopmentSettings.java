@@ -1334,7 +1334,6 @@ public class DevelopmentSettings extends PreferenceFragment
                     .putBoolean(PREF_SHOW, true)
                     .apply();
             }
-
         } else if (dialog == mRootDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 writeRootAccessOptions(mSelectedRootValue);
