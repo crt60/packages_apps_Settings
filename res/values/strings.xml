@@ -219,8 +219,6 @@
 
     <!-- Used as setting title (for checkbox) on second screen after selecting Bluetooth settings -->
     <string name="bluetooth">Bluetooth</string>
-    <!-- Bluetooth settings screen, check box label when the Bluetooth device can be seen by others -->
-    <string name="bluetooth_visibility">Discoverable</string>
     <!-- Bluetooth settings screen, summary after selecting Discoverable check box [CHAR LIMIT=50] -->
     <string name="bluetooth_is_discoverable">Visible to all nearby Bluetooth devices (<xliff:g id="discoverable_time_period">%1$s</xliff:g>)</string>
     <!-- Bluetooth settings screen, summary when Discoverable duration is set to "forever" [CHAR LIMIT=50] -->
@@ -229,12 +227,8 @@
     <string name="bluetooth_not_visible_to_other_devices">Not visible to other Bluetooth devices</string>
     <!-- Bluetooth settings screen, summary text when not discoverable with paired devices [CHAR LIMIT=50] -->
     <string name="bluetooth_only_visible_to_paired_devices">Only visible to paired devices</string>
-    <!-- Bluetooth settings screen, Discoverable checkbox summary text -->
-    <string name="bluetooth_not_discoverable">Make device discoverable</string>
     <!-- Bluetooth settings screen, option name to pick discoverability timeout duration (a list dialog comes up) -->
     <string name="bluetooth_visibility_timeout">Visibility timeout</string>
-    <!-- Bluetooth settings screen, Discoverable timout list dialog summary text -->
-    <string name="bluetooth_visibility_timeout_summary">Set how long device will be discoverable</string>
     <!-- Bluetooth settings screen, check box label whether or not to allow
         bluetooth voice dialing when lock screen is up-->
     <string name="bluetooth_lock_voice_dialing">Lock voice dialing</string>
@@ -1937,6 +1931,8 @@
     <string name="status_icc_id">ICCID</string>
     <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
     <string name="status_network_type">Mobile network type</string>
+    <!-- About phone, status item title for the latest area info cell broadcast received (Brazil only). -->
+    <string name="status_latest_area_info">Operator info</string>
     <!-- About phone, status item title. The status of data access.  For example, the value may be "Connected" -->
     <string name="status_data_state">Mobile network state</string>
     <!-- About phone, status item title. The status of whether we have service.  for example, the value may be "In service" -->
@@ -2458,24 +2454,6 @@
     <!-- Displayed when user launches a widget configuration activity that was uninstalled -->
     <string name="activity_not_found">Application is not installed on your phone.</string>
 
-    <!-- ChooseLockPatternTutorial --> <skip />
-    <!-- ChooseLockPatternTutorial, button labels: This is to cancel the tutorial -->
-    <string name="skip_button_label">Cancel</string>
-    <!-- ChooseLockPatternTutorial, button labels: Continue to the next page of the tutorial -->
-    <string name="next_button_label">Next</string>
-    <!-- ChooseLockPatternTutorial, tutorial screen title -->
-    <string name="lock_title" product="tablet">Securing your tablet</string>
-    <!-- ChooseLockPatternTutorial, tutorial screen title -->
-    <string name="lock_title" product="default">Securing your phone</string>
-    <!-- ChooseLockPatternTutorial, tutorial screen text -->
-    <string name="lock_intro_message" product="tablet">Protect your tablet from unauthorized use by creating a personal screen unlock pattern. Slide your finger to connect the dots in any order on the next screen.  You need to connect at least four dots.
-        \n\nReady to start? Touch Next.
-    </string>
-    <!-- ChooseLockPatternTutorial, tutorial screen text -->
-    <string name="lock_intro_message" product="default">Protect your phone from unauthorized use by creating a personal screen unlock pattern. Slide your finger to connect at least four dots in any order on the next screen.
-        \n\nReady to start? Touch Next.
-    </string>
-
     <!-- Applications Settings --> <skip />
     <!-- Applications settings screen, setting option name for the user to go to the screen to manage installed applications  -->
     <string name="manageapplications_settings_title">Manage apps</string>
@@ -2854,8 +2832,6 @@
     <string name="auto_punctuate_summary">Press Space key twice to insert \u0022.\u0022</string>
     <!-- On Security & location settings screen, setting check box name. Title of the checkbox to set whether password edit fields will show the most recent character typed and then hide it, or just hide it right away.  By hide, I mean mask it out. -->
     <string name="show_password">Make passwords visible</string>
-    <!-- On Security & location settings screen, setting check box summary. Summary for the visible passwords setting. -->
-    <string name="show_password_summary"></string>
     <!-- Warning message about security implications of enabling an input method, displayed as a dialog
          message when the user selects to enable an IME. -->
     <string name="ime_security_warning">This input method may be able to collect
@@ -4978,6 +4954,9 @@
     <string name="power_menu_reboot_title">Reboot menu</string>
     <string name="power_menu_screenshot_title">Screenshot</string>
     <string name="power_menu_expanded_desktop">Expanded desktop</string>
+    <string name="expanded_desktop_disabled">Disabled</string>
+    <string name="expanded_desktop_status_bar">Status bar visible</string>
+    <string name="expanded_desktop_no_status_bar">Status bar hidden</string>
     <string name="power_menu_profiles_title">Profile switcher</string>
     <string name="power_menu_airplane_title">Airplane mode</string>
     <string name="power_menu_user_title">User switcher</string>
@@ -5152,5 +5131,23 @@
     <string name="cyanogenmod_waiver_title">Waiver</string>
     <string name="cyanogenmod_waiver_body">Changing this setting may be against your state or government laws.\n\nIn selecting \'OK\' below, you acknowledge this warning and waive, indemnify and hold harmless CyanogenMod and its contributors from all legal liabilities.</string>
 
+    <!-- Automatic brightness customization -->
+    <string name="light_sensor_current_value">Current light sensor value: <xliff:g id="light_level">%d</xliff:g> lux</string>
+    <string name="auto_brightness_dialog_title">Automatic brightness levels</string>
+    <string name="auto_brightness_level_format"><xliff:g id="start_level">%1$s</xliff:g> -\n<xliff:g id="end_level">%2$s</xliff:g> lux</string>
+    <string name="auto_brightness_brightness_format"><xliff:g id="percent">%s</xliff:g>%%</string>
+    <string name="auto_brightness_adjust_button">Adjust</string>
+    <string name="auto_brightness_reset_button">Reset</string>
+    <string name="auto_brightness_lux_dialog_title">Ambient brightness range</string>
+    <string name="auto_brightness_split_dialog_title">Split brightness level</string>
+    <string name="auto_brightness_start_lux">Range start (lux)</string>
+    <string name="auto_brightness_end_lux">Range end (lux)</string>
+    <string name="auto_brightness_reset_dialog_title">Reset levels?</string>
+    <string name="auto_brightness_reset_confirmation">All brightness levels will be reset to their default settings.</string>
+    <string name="auto_brightness_split_lux_format">Split position (between <xliff:g id="min">%1$d</xliff:g> and <xliff:g id="max">%2$d</xliff:g> lux)</string>
+    <string name="auto_brightness_level_options">Light level options</string>
+    <string name="auto_brightness_menu_edit_lux">Ambient brightness range</string>
+    <string name="auto_brightness_menu_split">Split</string>
+    <string name="auto_brightness_menu_remove">Remove</string>
     <!-- **** CYANOGENMOD ADDITIONS END **** -->
 </resources>
