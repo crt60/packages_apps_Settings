@@ -22,17 +22,43 @@
     <PreferenceCategory
         android:title="@string/status_bar_clock_title">
 
-       <CheckBoxPreference
-            android:key="status_bar_show_clock"
-            android:title="@string/status_bar_show_clock_title"
-            android:defaultValue="true" />
+    <ListPreference
+        android:entries="@array/clock_style_entries"
+        android:entryValues="@array/clock_style_values"
+        android:key="clock_style"
+        android:title="@string/clock_title_enable" />
 
-        <ListPreference
-            android:key="status_bar_am_pm"
-            android:dialogTitle="@string/status_bar_am_pm_title"
-            android:title="@string/status_bar_am_pm_title"
-            android:entries="@array/entries_status_bar_am_pm"
-            android:entryValues="@array/values_status_bar_am_pm" />
+    <ListPreference
+        android:entries="@array/clock_ampm_entries"
+        android:entryValues="@array/clock_ampm_values"
+        android:key="clock_am_pm_style"
+        android:title="@string/title_clock_ampm_entries" />
+
+    <ListPreference
+        android:key="clock_weekday"
+        android:title="@string/enable_clock_weekday"
+        android:summary="@string/enable_clock_weekday_summary"
+        android:entries="@array/clock_weekday_entries"
+        android:entryValues="@array/clock_weekday_values" />
+
+    <ListPreference
+        android:entries="@array/notification_action_entries"
+        android:entryValues="@array/notification_action_values"
+        android:key="clock_shortclick"
+        android:title="@string/title_clock_shortclick" />
+	
+    <ListPreference
+        android:entries="@array/notification_action_entries"
+        android:entryValues="@array/notification_action_values"
+        android:key="clock_longclick"
+        android:title="@string/title_clock_longclick" />	
+
+    <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="clock_color"
+            android:title="@string/clock_color_title"
+            android:defaultValue="@android:color/holo_blue_light" />
+
+
 
     </PreferenceCategory>
 
@@ -46,6 +72,16 @@
             android:title="@string/status_bar_battery_title"
             android:entries="@array/entries_status_bar_battery"
             android:entryValues="@array/values_status_bar_battery" />
+	    
+	<net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="battery_color"
+            android:title="@string/battery_color_title"
+            android:defaultValue="@android:color/holo_blue_light" />
+	    
+	<net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:key="battery_font_color"
+            android:title="@string/battery_font_color_title"
+            android:defaultValue="@android:color/holo_blue_light" />          
 
         <ListPreference
             android:key="status_bar_signal"
