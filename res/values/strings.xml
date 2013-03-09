@@ -51,7 +51,7 @@
     <string name="header_category_personal">PERSONAL</string>
     <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
     <string name="header_category_system">SYSTEM</string>
-
+    <string name="udater_title">MrUpdater</string>
     <!-- Phone info -->
     <!-- Phone Info screen. Button label to turn on the radio . Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="turn_on_radio">Turn on radio</string>
@@ -580,7 +580,7 @@
 
     <!-- Button label for generic cancel action -->
     <string name="cancel">Cancel</string>
-    <string name="enable_quiettime">Enable Quiettime</string>
+    <string name="enable_quiettime">Enable QuietTime</string>
     <!-- Title of the Settings activity shown within the application itself. -->
     <string name="settings_label">Settings</string>
     <!-- Title of the Settings activity shown in the Launcher. [CHAR LIMIT=20] -->

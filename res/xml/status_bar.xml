@@ -76,12 +76,12 @@
 	<net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="battery_color"
             android:title="@string/battery_color_title"
-            android:defaultValue="@android:color/holo_blue_light" />
+            android:defaultValue="@android:color/circle_battery_mod" />
 	    
 	<net.margaritov.preference.colorpicker.ColorPickerPreference
             android:key="battery_font_color"
             android:title="@string/battery_font_color_title"
-            android:defaultValue="@android:color/holo_blue_light" />          
+            android:defaultValue="@android:color/circle_battery_font" />          
 
         <ListPreference
             android:key="status_bar_signal"

@@ -38,6 +38,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
@@ -435,6 +436,16 @@ public class Settings extends PreferenceActivity
             if (id == R.id.operator_settings || id == R.id.manufacturer_settings ||
                     id == R.id.advanced_settings) {
                 Utils.updateHeaderToSpecificActivityFromMetaDataOrRemove(this, target, header);
+			} else if (id == R.id.updater_settings) {
+			
+			try{
+               PackageInfo pInfo = getPackageManager().getPackageInfo
+               ("com.lithidsw.mrupdaterheadless",PackageManager.GET_META_DATA);
+               } catch (NameNotFoundException e) {
+					 target.remove(header);
+               }
+			
+                	
             } else if (id == R.id.launcher_settings) {
                 Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
                 launcherIntent.addCategory(Intent.CATEGORY_HOME);
