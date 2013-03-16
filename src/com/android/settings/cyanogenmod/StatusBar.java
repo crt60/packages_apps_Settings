@@ -53,7 +53,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String PREF_CLOCK_WEEKDAY = "clock_weekday";
     private static final String PREF_CLOCK_SHORTCLICK = "clock_shortclick";
     private static final String PREF_CLOCK_LONGCLICK = "clock_longclick";
-    private ListPreference mStatusBarAmPm;
+    
     private ListPreference mStatusBarBattery;
     private ListPreference mStatusBarCmSignal;
 //    private CheckBoxPreference mStatusBarClock;
@@ -135,8 +135,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
         try {
             if (Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                     Settings.System.TIME_12_24) == 24) {
-                mStatusBarAmPm.setEnabled(false);
-                mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
+                mClockAmPmstyle.setEnabled(false);
+                mClockAmPmstyle.setSummary(R.string.status_bar_am_pm_info);
             }
         } catch (SettingNotFoundException e ) {
         }
