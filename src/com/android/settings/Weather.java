@@ -106,6 +106,7 @@ public class Weather extends SettingsPreferenceFragment implements
                 && !mUseCustomLoc.isChecked()) {
             showDialog(LOC_WARNING);
         }
+		getPreferenceScreen().removePreference(mStatusBarLocation);
 
     }
 
