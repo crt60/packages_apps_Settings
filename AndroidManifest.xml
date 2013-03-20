@@ -1553,7 +1553,19 @@
 
         <activity android:name=".ApnEditor" />
 
-       
+        <activity android:name=".cyanogenmod.PropModder"
+            android:label="Propmodder" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.SHORTCUT" />
+            </intent-filter>
+        </activity>
+	
+	<activity android:name=".util.ShowBuildProp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
         <!-- CyanogenMod activities End -->
 
