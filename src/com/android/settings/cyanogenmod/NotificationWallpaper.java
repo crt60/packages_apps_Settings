@@ -128,7 +128,6 @@ public class NotificationWallpaper extends SettingsPreferenceFragment implements
         mNotifAlpha.setProperty(Settings.System.NOTIF_ALPHA);
         mNotifAlpha.setOnPreferenceChangeListener(this);
         getPreferenceScreen().removePreference(mNotificationWallpaperLandscape);
-		getPreferenceScreen().removePreference(mNotifAlpha);
         updateCustomBackgroundSummary();
     }
 
