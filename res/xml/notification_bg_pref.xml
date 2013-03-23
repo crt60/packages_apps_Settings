@@ -20,7 +20,7 @@
             android:key="notification_wallpaper"
             android:persistent="false"
             android:dialogTitle="@string/notification_wallpaper_title"
-            android:title="@string/notification_wallpaper_title"
+            android:title="@string/notification_wallpaper_background"
             android:entries="@array/notification_wallpaper_entries"
             android:entryValues="@array/notification_wallpaper_values"/>
 
