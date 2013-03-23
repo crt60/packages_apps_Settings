@@ -4856,7 +4856,7 @@
 
     <!-- Sound settings screen -->
     <!-- Notification drawer background -->
-    <string name="notification_wallpaper_title">Notification drawer background</string>
+    <string name="notification_wallpaper_title">Notification drawer style</string>
     <string name="notification_wallpaper_landscape_title">Different landscape background</string>
     <string name="notification_background_color_fill">Color fill</string>
     <string name="notification_background_custom_image">Custom image</string>
