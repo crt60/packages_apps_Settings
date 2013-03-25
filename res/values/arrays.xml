@@ -1718,6 +1718,9 @@
 
     <string-array name="entries_fast_up" translatable="false">
         <item>disable</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="entries_prox_delay_explain">
